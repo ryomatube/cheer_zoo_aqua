@@ -1,0 +1,49 @@
+version: 2.1
+executors:
+  default:
+    machine: true
+orbs:
+  aws-ecr: circleci/aws-ecr@6.0.0
+  aws-ecs: circleci/aws-ecs@0.0.8
+jobs:
+  deploy:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - aws-ecr/build-and-push-image:
+          region: AWS_REGION
+          account-url: AWS_ECR_REPOSITORY_URL	
+          repo: 'zoo_aqua'
+          dockerfile: ./dockerfile
+          # tag: "latest"
+
+      - run:
+          name: Install ECS-CLI
+          command: |
+            sudo curl -o /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest
+            sudo chmod +x /usr/local/bin/ecs-cli
+
+      - run:
+          name: ECS Config
+          command: |
+            ecs-cli configure \
+            --cluster zoo_aqua \
+            --region ${AWS_REGION} \
+            --default-launch-type EC2
+
+      - run:
+          name: Deploy
+          command: |
+            ecs-cli compose \
+            --file docker-compose_deploy.yml \
+            --ecs-params ./ecs-params.yml \
+            -p project \
+            service up \
+            --timeout 10 \
+          
+workflows:
+  build_and_deploy:
+    jobs:
+      - deploy:
+          name: deploy
