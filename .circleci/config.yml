@@ -14,7 +14,7 @@ jobs:
       - aws-ecr/build-and-push-image:
           region: AWS_REGION
           account-url: AWS_ECR_REPOSITORY_URL	
-          repo: 'zoo_aqua'
+          repo: 'zooaqua'
           dockerfile: ./dockerfile
           # tag: "latest"
 
