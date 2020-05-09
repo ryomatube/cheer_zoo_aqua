@@ -3,8 +3,8 @@ version: '3'
 services:
   web:
     image: AWS_ECR_REPOSITORY_URL_FULL
-    entrypoint: "/bin/bash -c"
-    command: python function.py
+    # entrypoint: "/bin/bash -c"
+    command: ["python", "function.py"]
     environment: 
       # 本体のAPIのKEY
       - CON_KEY
