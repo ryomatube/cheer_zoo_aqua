@@ -28,7 +28,7 @@ jobs:
           name: ECS Config
           command: |
             ecs-cli configure \
-            --cluster zoo_aqua \
+            --cluster zooaqua \
             --region ${AWS_REGION} \
             --default-launch-type EC2
 
