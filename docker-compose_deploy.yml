@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: AWS_ECR_REPOSITORY_URL_FULL
+    image: ${AWS_ECR_REPOSITORY_URL_FULL}
     command: python function.py
     environment: 
       # 本体のAPIのKEY
@@ -11,6 +11,7 @@ services:
       - ACC_KEY
       - ACC_KEY_SEC
       - QUERY=#休園中の動物園水族館
+      - AWS_ECR_REPOSITORY_URL_FULL
     logging:
       driver: awslogs
       options:
