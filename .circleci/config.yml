@@ -38,7 +38,7 @@ jobs:
             ecs-cli compose \
             --file docker-compose_deploy.yml \
             --ecs-params ./ecs-params.yml \
-            -p project \
+            -p zooaqua \
             service up \
             --timeout 10 \
           
