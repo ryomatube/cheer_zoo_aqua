@@ -1,6 +1,8 @@
 import tweepy 
 import json
 import os
+import traceback
+
 
 # Twitter APIで使用する各種キーをセット
 # API Key
@@ -26,14 +28,30 @@ class Listener(tweepy.StreamListener):
     def on_status(self, status):
         """ Prints tweet and hashtags """
         if "RT" not in status.text:
-            print('------------------------------')
-            print("@" + status.user.screen_name)
-            print(status.text)
-            print("")
-            try:
-                api.retweet(status.id)
-            except:
-                pass
+            # print('------------------------------')
+            # print("@" + status.user.screen_name)
+            # print(status.text)
+            # print("")
+
+            """ 引用RTならファボ、そうでないならRT """
+            if status.is_quote_status:
+                try:
+                    api.create_favorite(status.id)
+                except:
+                    print('------------------------------')
+                    print("@" + status.user.screen_name)
+                    print(status.text)
+                    print("")
+                    print(traceback.format_exc())
+            else:
+                try:
+                    api.retweet(status.id)
+                except:
+                    print('------------------------------')
+                    print("@" + status.user.screen_name)
+                    print(status.text)
+                    print("")
+                    print(traceback.format_exc())
         return True
 
     def on_error(self, status_code):
