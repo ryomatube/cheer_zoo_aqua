@@ -21,6 +21,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(Access_token, Access_token_secret)
 
 api = tweepy.API(auth)
+me = api.me()
 
 class Listener(tweepy.StreamListener):
     """ Handles tweets received from the stream. """
@@ -45,7 +46,8 @@ class Listener(tweepy.StreamListener):
                     print(traceback.format_exc())
             else:
                 try:
-                    api.retweet(status.id)
+                    if status.user.screen_name != me.screen_name:
+                        api.retweet(status.id)
                 except:
                     print('------------------------------')
                     print("@" + status.user.screen_name)
