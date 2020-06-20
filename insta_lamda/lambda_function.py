@@ -20,9 +20,6 @@ Access_token = os.environ['ACC_KEY']
 
 Access_token_secret = os.environ['ACC_KEY_SEC']
 
-# 検索するtag
-tag = "#休園中の動物園水族館"
-
 #インスタURL
 url = os.environ['URL']
 
