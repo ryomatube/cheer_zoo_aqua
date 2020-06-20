@@ -4,7 +4,6 @@ executors:
     machine: true
 orbs:
   aws-ecr: circleci/aws-ecr@6.0.0
-  aws-ecs: circleci/aws-ecs@0.0.8
 jobs:
   deploy:
     executor:
@@ -16,7 +15,6 @@ jobs:
           account-url: AWS_ECR_REPOSITORY_URL	
           repo: 'zooaqua'
           dockerfile: ./dockerfile
-          # tag: "latest"
 
       - run:
           name: Install ECS-CLI
