@@ -46,7 +46,7 @@ def lambda_handler(event, context):
             if diff.seconds < 3600:
                 # Tweet文を作成
                 # 130文字に調整
-                text = json.dumps(i["caption"], ensure_ascii=False)[1:130].replace(r'\n',"\r\n") + "..."
+                text = json.dumps(i["caption"], ensure_ascii=False)[1:130].replace(r'\n',"\r\n") + "... #休園中の動物園水族館 "
                 link = json.dumps(i["permalink"], ensure_ascii=False).replace('"',"")
 
                 # 投稿種別をチェックして画像URLを取得
