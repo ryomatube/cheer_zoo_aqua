@@ -10,10 +10,10 @@ consumer_key = os.environ['CON_KEY']
 # API secret key
 consumer_secret = os.environ['CON_KEY_SEC']
 
-# Twistantwinアカウントのアクセストークン
+# アクセストークン
 Access_token = os.environ['ACC_KEY']
 
-# Twistantwinアカウントのアクセストークンシークレット
+# アクセストークンシークレット
 Access_token_secret = os.environ['ACC_KEY_SEC']
 
 
@@ -29,10 +29,6 @@ class Listener(tweepy.StreamListener):
     def on_status(self, status):
         """ Prints tweet and hashtags """
         if "RT" not in status.text:
-            # print('------------------------------')
-            # print("@" + status.user.screen_name)
-            # print(status.text)
-            # print("")
 
             """ 引用RTならファボ、そうでないならRT """
             if status.is_quote_status:
